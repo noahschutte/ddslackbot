@@ -1,3 +1,4 @@
 const { sendDM } = require('./modules/slack')
+const { managerId } = require('config')
 
-sendDM('UB090A21F', 'yo yo yo')
+sendDM(managerId, 'yo yo yo')

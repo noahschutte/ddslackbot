@@ -6,12 +6,8 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.post('/purchase', async (req, res) => {
-    console.log(req.body)
-    res.json({
-        text: 'Thanks for the request.'
-    })
-})
+require('./routes/purchase')(app)
+require('./routes/action')(app)
 
 const PORT = 9647
 app.listen(PORT, () => {
