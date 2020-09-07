@@ -14,8 +14,8 @@ const sendDM = async (userId, message) => {
                 }
             }
         )
-        // console.log(conversationResponse.data.channel.id)
-            // console.log(message)
+        // console.log(conversationResponse)
+
         const postResponse = await axios.post(
             'https://slack.com/api/chat.postMessage',
             {
@@ -28,7 +28,7 @@ const sendDM = async (userId, message) => {
                 }
             }
         )
-        console.log(postResponse)
+        // console.log(postResponse)
 
     } catch (error) {
         throw error
