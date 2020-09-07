@@ -1,22 +1,27 @@
 const { sendDM } = require('../modules/slack')
+const { readPurchaseRequest, recordPurchaseRequestDecision } = require('../modules/database')
 
 module.exports = app => {
     app.post('/action', async (req, res) => {
         const interactiveMessage = JSON.parse(req.body.payload)
-        // console.log(interactiveMessage)
-        // const requestApproved = interactiveMessage.actions[0].value === 'approved'
         const originalTextMessage = interactiveMessage.original_message.text
+        const databaseKey = interactiveMessage.actions[0].name
+        const requestDecision = interactiveMessage.actions[0].value
 
         res.json({
             text: originalTextMessage,
             attachments: [
-                { text: interactiveMessage.actions[0].value }
+                { text: requestDecision }
             ]
         })
-        const matches = originalTextMessage.match(/@(.+)>.+\*(.+)\*/)
+
+        recordPurchaseRequestDecision(databaseKey, requestDecision)
+
+        const purchaseRequest = await readPurchaseRequest(databaseKey)
+
         sendDM(
-            matches[1],
-            `Your purchase request for ${matches[2]} was ${interactiveMessage.actions[0].value}`
+            purchaseRequest.userId,
+            `Your purchase request for ${purchaseRequest.item} was ${requestDecision}`
         )
     })
 }
