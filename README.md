@@ -12,6 +12,7 @@
   - Provide ngrok address
 - Create bot user
 - Obtain bot user access token
+- update config.js
 - Provide bot token scopes
   - im:write
   - mpim:write
@@ -20,6 +21,12 @@
   - channels:write
   - groups:write
 - Reinstall app
+- provide config.js with userId
+
+## Firebase Setup
+- Create database
+- provide keys in ./keys/dababase-keyfile.json
+- update config.js
 
 ### Test
 - `node testing.js`
