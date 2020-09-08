@@ -14,7 +14,6 @@ const sendDM = async (userId, message, attachments) => {
                 }
             }
         )
-        // console.log(conversationResponse)
 
         const postResponse = await axios.post(
             'https://slack.com/api/chat.postMessage',
@@ -29,7 +28,6 @@ const sendDM = async (userId, message, attachments) => {
                 }
             }
         )
-        // console.log(postResponse)
 
     } catch (error) {
         throw error
